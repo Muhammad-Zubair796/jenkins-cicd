@@ -11,11 +11,11 @@ pipeline {
         DOCKER_HUB_USER   = 'adrainbialon'
         DOCKER_IMAGE_NAME = 'ultimate-cicd'
         DOCKER_CRED_ID    = 'docker-cred'
-        SONAR_URL         = 'http://54.146.74.143:9000'
+        SONAR_URL         = 'http://107.21.164.185:9000'
         SONAR_CRED_ID     = 'sonarqube'
-        GITHUB_USER       = 'adrainbialon'
+        GITHUB_USER       = 'Muhammad-Zubair796'
         GITHUB_EMAIL      = 'adrainbialon@gmail.com'
-        GITHUB_REPO       = 'Jenkins-Zero-To-Hero'
+        GITHUB_REPO       = 'jenkins-cicd'
         GITHUB_CRED_ID    = 'github'
     }
 
