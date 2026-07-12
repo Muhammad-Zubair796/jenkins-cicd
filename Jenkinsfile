@@ -65,7 +65,7 @@ pipeline {
                         git config user.email "${GITHUB_EMAIL}"
                         git config user.name "${GITHUB_USER}"
                         
-                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" ../spring-boot-app-manifests/deployment.yml
+                        sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" spring-boot-app-manifests/deployment.yml
                         
                         git add ../spring-boot-app-manifests/deployment.yml
                         git commit -m "chore: update deployment image tag to ${BUILD_NUMBER} [skip ci]"
