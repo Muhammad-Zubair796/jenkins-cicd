@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.9.6-eclipse-temurin-17-alpine'
-            args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
-        }
-    }
+    agent any // Global execution on the host server (Single, clean workspace)
 
     environment {
         SUB_DIR           = 'jenkins'
@@ -27,6 +22,12 @@ pipeline {
         }
 
         stage('Build & Unit Test') {
+            agent {
+                docker {
+                    image 'maven:3.9.6-eclipse-temurin-17-alpine'
+                    args '--user root'
+                }
+            }
             steps {
                 dir("${SUB_DIR}") {
                     sh 'mvn clean package'
@@ -35,6 +36,12 @@ pipeline {
         }
 
         stage('Static Analysis') {
+            agent {
+                docker {
+                    image 'maven:3.9.6-eclipse-temurin-17-alpine'
+                    args '--user root'
+                }
+            }
             steps {
                 dir("${SUB_DIR}") {
                     withCredentials([string(credentialsId: "${SONAR_CRED_ID}", variable: 'SONAR_AUTH_TOKEN')]) {
@@ -45,7 +52,6 @@ pipeline {
         }
 
         stage('Image Build & Publish') {
-            agent any  // Bypasses the Maven container, runs directly on your host where Docker is installed
             steps {
                 dir("${SUB_DIR}") {
                     script {
@@ -60,7 +66,6 @@ pipeline {
         }
 
         stage('Gitops Synchronization') {
-            agent any  // Runs directly on your host where Git is installed
             steps {
                 withCredentials([string(credentialsId: "${GITHUB_CRED_ID}", variable: 'GITHUB_TOKEN')]) {
                     sh """
