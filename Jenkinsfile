@@ -45,6 +45,7 @@ pipeline {
         }
 
         stage('Image Build & Publish') {
+            agent any  // Bypasses the Maven container, runs directly on your host where Docker is installed
             steps {
                 dir("${SUB_DIR}") {
                     script {
@@ -59,6 +60,7 @@ pipeline {
         }
 
         stage('Gitops Synchronization') {
+            agent any  // Runs directly on your host where Git is installed
             steps {
                 withCredentials([string(credentialsId: "${GITHUB_CRED_ID}", variable: 'GITHUB_TOKEN')]) {
                     sh """
@@ -67,7 +69,7 @@ pipeline {
                         
                         sed -i "s/replaceImageTag/${BUILD_NUMBER}/g" spring-boot-app-manifests/deployment.yml
                         
-                        git add ../spring-boot-app-manifests/deployment.yml
+                        git add spring-boot-app-manifests/deployment.yml
                         git commit -m "chore: update deployment image tag to ${BUILD_NUMBER} [skip ci]"
                         git push https://${GITHUB_TOKEN}@github.com/${GITHUB_USER}/${GITHUB_REPO} HEAD:main
                     """
