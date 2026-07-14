@@ -49,13 +49,13 @@ The pipeline initiates by compiling the Spring Boot application and running stri
 <br>
   
 **Maven Build Success:**
-![Maven Build](screenshots/mvn%20clean%20package.PNG)
+![Maven Build](mvn%20clean%20package.PNG)
 
 **SonarQube Quality Gate Passed:**
-![SonarQube Analysis](screenshots/sonaranalysis.PNG)
+![SonarQube Analysis](sonaranalysis.PNG)
 
 **Jenkins Pipeline Stages:**
-![Jenkins Stages](screenshots/stages.PNG)
+![Jenkins Stages](stages.PNG)
 </details>
 
 ### 2. Containerization & GitOps Synchronization
@@ -66,10 +66,10 @@ Once the image is pushed to Docker Hub, Jenkins uses `sed` to dynamically update
 <br>
 
 **Docker Build & Tagging:**
-![Docker Build](screenshots/dockerbuild.PNG)
+![Docker Build](dockerbuild.PNG)
 
 **Automated GitHub Commit via Jenkins:**
-![Pipeline Finished](screenshots/pipelinefinished.PNG)
+![Pipeline Finished](pipelinefinished.PNG)
 </details>
 
 ### 3. Continuous Deployment (Argo CD & Kubernetes)
@@ -80,10 +80,10 @@ Argo CD detects the new commit, pulls the updated `deployment.yml`, and synchron
 <br>
 
 **Argo CD Dashboard (Healthy & Synced):**
-![Argo CD Sync](screenshots/argocd2.PNG)
+![Argo CD Sync](argocd2.PNG)
 
 **Argo CD Application Tree:**
-![Argo CD Tree](screenshots/argocd%20ui.PNG)
+![Argo CD Tree](argocd%20ui.PNG)
 </details>
 
 ---
@@ -91,7 +91,7 @@ Argo CD detects the new commit, pulls the updated `deployment.yml`, and synchron
 ## 🎉 Final Production Application
 With the GitOps synchronization complete, the Kubernetes `NodePort` service successfully routes traffic to the newly deployed Spring Boot pods.
 
-![Live Application](screenshots/app.PNG)
+![Live Application](app.PNG)
 
 ---
 
